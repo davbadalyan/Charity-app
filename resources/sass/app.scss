@@ -1,0 +1,21 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+// @import 'variables';
+
+// Bootstrap   
+
+/* import the necessary Bootstrap files */
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/_variables";
+//@import "~bootstrap/scss/mixins/_breakpoints";
+
+/* make changes to the !default Bootstrap variables */    
+$theme-colors: (
+  primary: #f00,
+);
+
+/* finally, import Bootstrap to set the changes! */
+@import "~bootstrap/scss/bootstrap";
+
