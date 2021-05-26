@@ -18,10 +18,12 @@ class Event extends Model
     protected $fillable = [
         'title',
         'short_description',
-        'generated promo_code',
+        'promo_code',
         'start_date',
         'raised_amount',
         'goal_amount',
-        'deleted_at',
+        // 'deleted_at',
     ];
+
+
 }

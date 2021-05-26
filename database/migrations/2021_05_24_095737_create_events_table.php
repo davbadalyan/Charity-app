@@ -17,10 +17,10 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('short_description');
-            $table->string('generated promo_code');
+            $table->string('promo_code');
             $table->date('start_date');
-            $table->string('raised_amount');
-            $table->string('goal_amount');
+            $table->decimal('raised_amount');
+            $table->decimal('goal_amount');
             $table->softDeletes();
             $table->timestamps();
         });
