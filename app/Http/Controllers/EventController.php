@@ -25,7 +25,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('admin.events.create');
     }
 
     /**
@@ -36,7 +37,33 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'file' => 'nullable|file|mimes:png,jpg|max:4096', //mb
+            'short_description' => 'required|string',
+            'promo_code' => 'required|string',
+            'start_date' => 'required|date',
+            'raised_amount' => 'required|numeric|min:0|max:99999',
+            'goal_amount' => 'required|numeric|min:0|max:99999',
+        ]);
+
+        $name = "";
+
+        if($request->hasFile('file')){
+            $file = $request->file('file');
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $file->storePubliclyAs('/public/images', $name);
+            // $file->move(public_path('uploads'), $name);
+        }
+
+        $data = $request->except(['file', '_token']) + ['image' => $name];
+
+        Event::create($data);
+        // $event = new Event($data);
+        // $event->fill($data);
+        // $event->save();
+
+        return back()->withSuccess('Event created.');
     }
 
     /**

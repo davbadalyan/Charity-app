@@ -22,6 +22,7 @@ class Event extends Model
         'start_date',
         'raised_amount',
         'goal_amount',
+        'image',
         // 'deleted_at',
     ];
 

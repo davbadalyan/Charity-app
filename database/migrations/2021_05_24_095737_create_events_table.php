@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration
             $table->text('short_description');
             $table->string('promo_code');
             $table->date('start_date');
+            $table->string('image')->nullable();
             $table->decimal('raised_amount');
             $table->decimal('goal_amount');
             $table->softDeletes();
