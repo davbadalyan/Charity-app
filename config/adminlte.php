@@ -247,6 +247,11 @@ return [
             // 'can'  => 'manage-events',
         ],
         [
+            'text' => 'posts',
+            'url'  => 'admin/posts',
+            // 'can'  => 'manage-events',
+        ],
+        [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
@@ -356,7 +361,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

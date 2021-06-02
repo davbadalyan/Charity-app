@@ -2,12 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\EventStoreRequest;
+use App\Http\Requests\Admin\EventUpdateRequest;
 use App\Models\Event;
 use App\Models\User;
+use App\Services\ImageService;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session as FacadesSession;
+use Symfony\Component\HttpFoundation\File\Exception\UploadException;
+use Symfony\Component\Process\Pipes\WindowsPipes;
 
 class EventController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->imageService = new ImageService('event_images');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +28,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        return 'events';
+        $events = Event::withTrashed()->get();
+
+        return view('admin.events.index')->with(compact('events'));
     }
 
     /**
@@ -35,33 +50,17 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventStoreRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string',
-            'file' => 'nullable|file|mimes:png,jpg|max:4096', //mb
-            'short_description' => 'required|string',
-            'promo_code' => 'required|string',
-            'start_date' => 'required|date',
-            'raised_amount' => 'required|numeric|min:0|max:99999',
-            'goal_amount' => 'required|numeric|min:0|max:99999',
-        ]);
-
-        $name = "";
-
-        if($request->hasFile('file')){
-            $file = $request->file('file');
-            $name = time().'.'.$file->getClientOriginalExtension();
-            $file->storePubliclyAs('/public/images', $name);
-            // $file->move(public_path('uploads'), $name);
+        try {
+            $fileName = $this->imageService->uploadImageGetName($request->file('file'));
+        } catch (UploadException $e) {
+            return back()->withErrors(['file' => $e->getMessage()]);
         }
 
-        $data = $request->except(['file', '_token']) + ['image' => $name];
+        $data = $request->except(['file', '_token']) + ['image' => $fileName];
 
         Event::create($data);
-        // $event = new Event($data);
-        // $event->fill($data);
-        // $event->save();
 
         return back()->withSuccess('Event created.');
     }
@@ -74,7 +73,8 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        // dd($event->id);        
+        return $event;
     }
 
     /**
@@ -85,7 +85,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('admin.events.edit')->with(['event' => $event]);
     }
 
     /**
@@ -95,19 +95,54 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(EventUpdateRequest $request, Event $event)
     {
-        //
+        $fileName = $event->image;
+
+        if ($request->hasFile('file')) {
+            try {
+                $this->imageService->deleteImage($fileName);
+
+                $fileName = $this->imageService->uploadImageGetName($request->file('file'));
+            } catch (UploadException $e) {
+                return back()->withErrors(['file' => $e->getMessage()]);
+            }
+        }
+
+        $data = $request->except(['file', '_token']) + ['image' => $fileName];
+
+        $event->update($data);
+
+        return back()->withSuccess('Event updated.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Event  $event
+     * @param  int  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Request $request, $event)
     {
-        //
+        $event = Event::withTrashed()->findOrFail($event);
+
+
+        // $event->{$request->action}();
+
+        switch ($request->action) {
+            case 'restore':
+                $event->restore();
+                $message = 'Restored';
+                break;
+            case 'forceDelete':
+                $event->forceDelete();
+                $message = 'Deleted Permanently';
+                break;
+            default:
+                $event->delete();
+                $message = 'Archived';
+        }
+
+        return redirect()->route('admin.events.index')->withSuccess("Event {$message}");
     }
 }

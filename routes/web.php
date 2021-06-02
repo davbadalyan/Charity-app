@@ -20,4 +20,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin.'], fu
 
     Route::resource('events', EventController::class);
 
+
 });
