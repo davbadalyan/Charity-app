@@ -16,8 +16,9 @@ Route::get('/home', function() {
     return view('home');
 })->name('home')->middleware('auth');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin.'], function(){
 
     Route::resource('events', EventController::class);
+
 
 });
