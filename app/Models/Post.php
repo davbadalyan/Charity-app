@@ -45,12 +45,18 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Query\Builder|Event withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Event withoutTrashed()
  * @mixin \Eloquent
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
- * @property-read int|null $media_count
+ * @property string $description
+ * @property int $event_id
+ * @property-read string|null $image_url
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereEventId($value)
  */
-class Event extends Model implements HasMedia
+
+class Post extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia;
+
+    private $imageService;
 
     /**
      * The attributes that are mass assignable.
@@ -60,14 +66,12 @@ class Event extends Model implements HasMedia
     protected $fillable = [
         'title',
         'short_description',
-        'promo_code',
-        'start_date',
-        'raised_amount',
-        'goal_amount',
+        'description',
+        'event_id',
     ];
 
-    public function post()
+    public function event()
     {
-        return $this->hasOne(Post::class);
+        return $this->belongsTo(Event::class);
     }
 }

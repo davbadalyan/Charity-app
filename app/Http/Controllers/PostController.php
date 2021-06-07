@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Admin\EventStoreRequest;
-use App\Http\Requests\Admin\EventUpdateRequest;
+use App\Http\Requests\Admin\PostStoreRequest;
+use App\Http\Requests\Admin\PostUpdateRequest;
 use App\Models\Event;
+use App\Models\Post;
 use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Contracts\Session\Session;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Session as FacadesSession;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\Process\Pipes\WindowsPipes;
 
-class EventController extends Controller
+class PostController extends Controller
 {
 
     /**
@@ -23,9 +24,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::withTrashed()->get();
+        $posts = Post::all();
 
-        return view('admin.events.index')->with(compact('events'));
+        return view('admin.posts.index')->with(compact('posts'));
     }
 
     /**
@@ -35,8 +36,9 @@ class EventController extends Controller
      */
     public function create()
     {
+        $events = Event::all();
 
-        return view('admin.events.create');
+        return view('admin.posts.create')->with(compact('events'));
     }
 
     /**
@@ -45,52 +47,52 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventStoreRequest $request)
+    public function store(PostStoreRequest $request)
     {
-
         $data = $request->except(['file', '_token']);
 
-        /** @var  \App\Models\Event $event */
-        $event = Event::create($data);
+        /** @var  \App\Models\Post $post */
+        $post = Post::create($data);
 
-        $event->addAllMediaFromRequest('file')->each(fn ($fileAdder) => $fileAdder->toMediaCollection());
+        $post->addAllMediaFromRequest('file')->each(fn ($fileAdder) => $fileAdder->toMediaCollection());
 
-        return back()->withSuccess('Event created.');
+        return back()->withSuccess('Post created.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Post $post)
     {
-        // dd($event->id);        
-        return $event;
+        return $post;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit(Post $post)
     {
-        return view('admin.events.edit')->with(['event' => $event]);
+        $events = Event::all();
+
+        return view('admin.posts.edit')->with(['post' => $post, 'events' => $events]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(EventUpdateRequest $request, Event $event)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        $fileName = $event->image;
+        $fileName = $post->image;
 
         if ($request->hasFile('file')) {
             try {
@@ -104,38 +106,21 @@ class EventController extends Controller
 
         $data = $request->except(['file', '_token']) + ['image' => $fileName];
 
-        $event->update($data);
+        $post->update($data);
 
-        return back()->withSuccess('Event updated.');
+        return back()->withSuccess('Post updated.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $event
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $event)
+    public function destroy(Post $post)
     {
-        $event = Event::withTrashed()->findOrFail($event);
+        $post->delete();
 
-
-        // $event->{$request->action}();
-
-        switch ($request->action) {
-            case 'restore':
-                $event->restore();
-                $message = 'Restored';
-                break;
-            case 'forceDelete':
-                $event->forceDelete();
-                $message = 'Deleted Permanently';
-                break;
-            default:
-                $event->delete();
-                $message = 'Archived';
-        }
-
-        return redirect()->route('admin.events.index')->withSuccess("Event {$message}");
+        return redirect()->route('admin.posts.index')->withSuccess("Post deleted");
     }
 }
