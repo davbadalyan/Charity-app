@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Create Event</h1>
+    <h1 class="m-0 text-dark">Create Post</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form action="{{ route('admin.events.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>Title</label>
@@ -31,33 +31,22 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Promo_code</label>
-                            <input class="form-control" name="promo_code" value="{{ old('promo_code') }}" type="text">
-                            @error('promo_code')
+                            <label>Description</label>
+                            <input class="form-control" name="description" value="{{ old('description') }}" type="text">
+                            @error('description')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label>Start_date</label>
-                            <input class="form-control" name="start_date" value="{{ old('start_date') }}" type="date">
-                            @error('start_date')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>Raised_amount</label>
-                            <input class="form-control" name="raised_amount" value="{{ old('raised_amount') }}" type="number" min="0" max="99999">
-                            @error('raised_amount')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>Goal_amount</label>
-                            <input class="form-control" name="goal_amount" value="{{ old('goal_amount') }}" type="number" min="0" max="99999">
-                            @error('goal_amount')
+                            <label>Event</label>
+                            <select name="event_id" class="form-control">
+                                <option value=""></option>
+                                @foreach ($events as $event)
+                                    <option {{ $event->id==old('event_id') ? "selected" : '' }} value="{{ $event->id }}">{{ $event->title }}</option>
+                                @endforeach
+                            </select>
+                            @error('event_id')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

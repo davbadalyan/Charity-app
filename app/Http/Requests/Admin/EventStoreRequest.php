@@ -25,7 +25,8 @@ class EventStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'file' => 'required|file|mimes:png,jpg|max:4096', //mb
+            'file' => 'required|array|max:7', //count
+            'file.*' => 'required|file|mimes:png,jpg|max:4096', //mb
             'short_description' => 'required|string',
             'promo_code' => 'required|string',
             'start_date' => 'required|date',

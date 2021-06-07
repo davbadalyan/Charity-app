@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventUpdateRequest extends FormRequest
+class PostStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,22 +28,8 @@ class EventUpdateRequest extends FormRequest
             'file' => 'required|array|max:7', //count
             'file.*' => 'required|file|mimes:png,jpg|max:4096', //mb
             'short_description' => 'required|string',
-            'promo_code' => 'required|string',
-            'start_date' => 'required|date',
-            'raised_amount' => 'required|numeric|min:0|max:99999',
-            'goal_amount' => 'required|numeric|min:0|max:99999',
+            'description' => 'required|string',
+            'event_id' => 'nullable|integer',
         ];
-    }
-
-    public function uploadFileGetName(): string
-    {
-        if ($this->hasFile('file')) {
-            $file = $this->file('file');
-            // dd($file);
-            $name = time() . '.' . $file->getClientOriginalExtension();
-            $file->storePubliclyAs('/public/images', $name);
-        }
-
-        return $name ?? '';
     }
 }
