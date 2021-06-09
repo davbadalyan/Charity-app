@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Services\ImageService;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -52,11 +54,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereEventId($value)
  */
 
-class Post extends Model implements HasMedia
+class Post extends Model implements HasMedia, TranslatableContract
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, Translatable;
 
-    private $imageService;
+    protected $translatedAttributes = ['title', 'short_description', 'description'];
 
     /**
      * The attributes that are mass assignable.
@@ -64,9 +66,6 @@ class Post extends Model implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'title',
-        'short_description',
-        'description',
         'event_id',
     ];
 

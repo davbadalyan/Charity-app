@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use Astrotomic\Translatable\Validation\RuleFactory;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EventUpdateRequest extends FormRequest
@@ -23,11 +24,14 @@ class EventUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required|string',
-            'file' => 'required|array|max:7', //count
+        $rules = RuleFactory::make([
+            '%title%' => 'required|string|max:191',
+            '%short_description%' => 'required|string|max:1000',
+        ]);
+
+        return $rules + [
+            'file' => 'nullable|array|max:7', //count
             'file.*' => 'required|file|mimes:png,jpg|max:4096', //mb
-            'short_description' => 'required|string',
             'promo_code' => 'required|string',
             'start_date' => 'required|date',
             'raised_amount' => 'required|numeric|min:0|max:99999',

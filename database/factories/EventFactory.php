@@ -23,12 +23,25 @@ class EventFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->text(10),
-            'short_description' => $this->faker->text(),
-            'promo_code' => '#'.Str::random(1).$this->faker->numberBetween($min = 10000, $max = 99999).Str::random(1),
+            'promo_code' => '#' . Str::random(1) . $this->faker->numberBetween($min = 10000, $max = 99999) . Str::random(1),
             'start_date' => now(),
             'raised_amount' => $this->faker->numberBetween($min = 0, $max = 1000),
             'goal_amount' => $this->faker->numberBetween($min = 0, $max = 5000),
+
+            // 'en' => [
+            'title' => $this->faker->text(10),
+            'short_description' => $this->faker->text()
+            // ],
+
+            // 'ru' => [
+            //     'title' => $this->faker->text(10),
+            //     'short_description' => $this->faker->text()
+            // ],
+
+            // 'hy' => [
+            //     'title' => $this->faker->text(10),
+            //     'short_description' => $this->faker->text()
+            // ]
         ];
     }
 }

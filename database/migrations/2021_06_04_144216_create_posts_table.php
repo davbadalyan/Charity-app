@@ -16,9 +16,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('short_description');
-            $table->text('description');
+            
             $table->foreignId('event_id')->nullable()->references('id')->on('events');
             // $table->softDeletes();
             $table->timestamps();

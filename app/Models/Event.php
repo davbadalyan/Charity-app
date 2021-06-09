@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+
 //@property \App\Services\ImageService $imageService
 
 /**
@@ -48,9 +51,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
  * @property-read int|null $media_count
  */
-class Event extends Model implements HasMedia
+class Event extends Model implements HasMedia, TranslatableContract
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia, Translatable;
+
+    protected $translatedAttributes = ['title', 'short_description'];
 
     /**
      * The attributes that are mass assignable.
@@ -58,8 +63,6 @@ class Event extends Model implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'title',
-        'short_description',
         'promo_code',
         'start_date',
         'raised_amount',
