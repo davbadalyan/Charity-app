@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\EventUpdateRequest;
 use App\Models\Event;
 use App\Models\User;
 use App\Services\ImageService;
+use Astrotomic\Translatable\Locales;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -35,7 +36,6 @@ class EventController extends Controller
      */
     public function create()
     {
-
         return view('admin.events.create');
     }
 

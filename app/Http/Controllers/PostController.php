@@ -34,11 +34,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $events = Event::all();
+        $event = Event::find($request->get('event_id'));
 
-        return view('admin.posts.create')->with(compact('events'));
+        return view('admin.posts.create')->with(compact('events', 'event'));
     }
 
     /**

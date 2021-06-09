@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use Astrotomic\Translatable\Validation\RuleFactory;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostStoreRequest extends FormRequest
@@ -23,12 +24,15 @@ class PostStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required|string',
+        $rules = RuleFactory::make([
+            '%title%' => 'required|string|max:191',
+            '%short_description%' => 'required|string|max:1000',
+            '%description%' => 'required|string|max:5000',
+        ]);
+
+        return $rules + [
             'file' => 'required|array|max:7', //count
             'file.*' => 'required|file|mimes:png,jpg|max:4096', //mb
-            'short_description' => 'required|string',
-            'description' => 'required|string',
             'event_id' => 'nullable|integer',
         ];
     }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Astrotomic\Translatable\Locales;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Locales $locales)
     {
-        //
+        View::composer('*', fn ($view) => $view->with('locales', $locales->all()));
     }
 }
