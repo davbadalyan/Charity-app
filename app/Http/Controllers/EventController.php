@@ -90,21 +90,10 @@ class EventController extends Controller
      */
     public function update(EventUpdateRequest $request, Event $event)
     {
-        $fileName = $event->image;
-
-        if ($request->hasFile('file')) {
-            try {
-                $this->imageService->deleteImage($fileName);
-
-                $fileName = $this->imageService->uploadImageGetName($request->file('file'));
-            } catch (UploadException $e) {
-                return back()->withErrors(['file' => $e->getMessage()]);
-            }
-        }
-
-        $data = $request->except(['file', '_token']) + ['image' => $fileName];
+        $data = $request->except(['file', '_token']);
 
         $event->update($data);
+        $event->addAllMediaFromRequest('file')->each(fn ($fileAdder) => $fileAdder->toMediaCollection());
 
         return back()->withSuccess('Event updated.');
     }

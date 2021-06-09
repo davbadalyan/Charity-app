@@ -12,12 +12,14 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form action="{{ route('admin.events.update', ['event' => $event]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.events.update', ['event' => $event]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <div class="form-group">
                             <label>Title</label>
-                            <input class="form-control" name="title" value="{{ old('title', $event->title) }}" type="text">
+                            <input class="form-control" name="title" value="{{ old('title', $event->title) }}"
+                                type="text">
                             @error('title')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -25,7 +27,8 @@
 
                         <div class="form-group">
                             <label>Short Description</label>
-                            <input class="form-control" name="short_description" value="{{ old('short_description', $event->short_description) }}" type="text">
+                            <input class="form-control" name="short_description"
+                                value="{{ old('short_description', $event->short_description) }}" type="text">
                             @error('short_description')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -49,7 +52,8 @@
 
                         <div class="form-group">
                             <label>Raised Amount</label>
-                            <input class="form-control" name="raised_amount" value="{{ $event->raised_amount }}" type="number" min="0" max="99999">
+                            <input class="form-control" name="raised_amount" value="{{ $event->raised_amount }}"
+                                type="number" min="0" max="99999">
                             @error('raised_amount')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -57,7 +61,8 @@
 
                         <div class="form-group">
                             <label>Goal Amount</label>
-                            <input class="form-control" name="goal_amount" type="number" value="{{ $event->goal_amount }}" min="0" max="99999">
+                            <input class="form-control" name="goal_amount" type="number"
+                                value="{{ $event->goal_amount }}" min="0" max="99999">
                             @error('goal_amount')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -65,19 +70,53 @@
 
                         <div class="form-group">
 
-                            <div style="width: 300px">
-                                <img src="{{ $event->getFirstMediaUrl() }}" alt="{{ $event->title }}" class="img-fluid">
-                            </div>
-
                             <label>Image</label>
-                            <input class="form-control" name="file" type="file">
+                            <input class="form-control" accept="image/*" name="file[]" type="file" multiple maxlength="7">
                             @error('file')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            @error('file.*')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <button class="btn btn-primary">Save</button>
                     </form>
+
+
+                    <div class="card card-widget mt-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3>Images</h3>
+                            </div>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-2x fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                @forelse ($event->getMedia() as $media)
+                                    <div class="card col-lg-3 col-sm-6 col-xs-12 my-2">
+                                        <img class="card-img-top" src="{{ $media->getUrl() }}" alt="" />
+                                        <div class="card-img-overlay d-flex align-items-start justify-content-end">
+                                            <a href="{{ $media->getUrl() }}" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                                            <form action="{{ route('admin.media.delete', ['media' => $media]) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="ml-1 btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <h4 class="text-danger">No media found</h4>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
