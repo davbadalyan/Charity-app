@@ -34,16 +34,4 @@ class EventUpdateRequest extends FormRequest
             'goal_amount' => 'required|numeric|min:0|max:99999',
         ];
     }
-
-    public function uploadFileGetName(): string
-    {
-        if ($this->hasFile('file')) {
-            $file = $this->file('file');
-            // dd($file);
-            $name = time() . '.' . $file->getClientOriginalExtension();
-            $file->storePubliclyAs('/public/images', $name);
-        }
-
-        return $name ?? '';
-    }
 }

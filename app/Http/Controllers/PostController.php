@@ -92,21 +92,10 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
-        $fileName = $post->image;
-
-        if ($request->hasFile('file')) {
-            try {
-                $this->imageService->deleteImage($fileName);
-
-                $fileName = $this->imageService->uploadImageGetName($request->file('file'));
-            } catch (UploadException $e) {
-                return back()->withErrors(['file' => $e->getMessage()]);
-            }
-        }
-
-        $data = $request->except(['file', '_token']) + ['image' => $fileName];
+        $data = $request->except(['file', '_token']);
 
         $post->update($data);
+        $post->addAllMediaFromRequest('file')->each(fn ($fileAdder) => $fileAdder->toMediaCollection());
 
         return back()->withSuccess('Post updated.');
     }
