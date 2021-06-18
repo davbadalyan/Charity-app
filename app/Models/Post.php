@@ -52,6 +52,22 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property-read string|null $image_url
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereEventId($value)
+ * @property-read \App\Models\Event|null $event
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
+ * @property-read \App\Models\PostTranslation|null $translation
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostTranslation[] $translations
+ * @property-read int|null $translations_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Post listsTranslations(string $translationField)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post notTranslatedIn(?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post orWhereTranslation(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post orWhereTranslationLike(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post orderByTranslation(string $translationField, string $sortMethod = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Post translated()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post translatedIn(?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTranslation(string $translationField, $value, ?string $locale = null, string $method = 'whereHas', string $operator = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTranslationLike(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post withTranslation()
  */
 
 class Post extends Model implements HasMedia, TranslatableContract

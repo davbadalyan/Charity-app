@@ -59,6 +59,27 @@
             @enderror
         </div>
 
+        {{-- <div class="form-group">
+            <b><p>Show foundation status</p></b>
+            <label>Yes</label>
+            <input name="show_foundation_status" value="Yes" type="radio">
+            <label>No</label>
+            <input name="show_foundation_status" value="No" type="radio">
+            @error('show_foundation_status')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div> --}}
+
+        <div class="form-group">
+            <div class="custom-switch">
+                <input type="checkbox" name="show_foundation_status" value="1" class="custom-control-input" id="show-foundation-status">
+                <label class="custom-control-label" for="show-foundation-status">Show foundation status.</label>
+            </div>
+            @error('show_foundation_status')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
         <div class="form-group">
             <label>Start_date</label>
             <input class="form-control" name="start_date" value="{{ old('start_date') }}" type="date">
@@ -81,6 +102,27 @@
             <input class="form-control" name="goal_amount" value="{{ old('goal_amount') }}" type="number" min="0"
                 max="99999">
             @error('goal_amount')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        {{-- <div class="form-group">
+            <b><p>Show button</p></b>
+            <label>Yes</label>
+            <input name="show_button" value="Yes" type="radio">
+            <label>No</label>
+            <input name="show_button" value="No" type="radio">
+            @error('show_button')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div> --}}
+
+        <div class="form-group">
+            <div class="custom-switch">
+                <input type="checkbox" name="show_button" value="1" class="custom-control-input" id="show-btn-switch">
+                <label class="custom-control-label" for="show-btn-switch">Show 'Donate now' button status.</label>
+            </div>
+            @error('show_button')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>

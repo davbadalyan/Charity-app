@@ -13,6 +13,7 @@
         "jeroennoten/laravel-adminlte": "^3.6",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "mcamara/laravel-localization": "^1.6",
         "spatie/laravel-medialibrary": "^9.0.0"
     },
     "require-dev": {
