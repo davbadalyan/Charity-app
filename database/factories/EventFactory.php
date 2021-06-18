@@ -27,6 +27,8 @@ class EventFactory extends Factory
             'start_date' => now(),
             'raised_amount' => $this->faker->numberBetween($min = 0, $max = 1000),
             'goal_amount' => $this->faker->numberBetween($min = 0, $max = 5000),
+            'show_foundation_status' => $this->faker->boolean(),
+            'show_button' => $this->faker->boolean(),
 
             // 'en' => [
             'title' => $this->faker->text(10),

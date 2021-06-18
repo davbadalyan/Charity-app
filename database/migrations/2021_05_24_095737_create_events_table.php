@@ -18,9 +18,11 @@ class CreateEventsTable extends Migration
             // $table->string('title');
             // $table->text('short_description');
             $table->string('promo_code');
+            $table->boolean('show_foundation_status')->default(false);
             $table->date('start_date');
             $table->decimal('raised_amount');
             $table->decimal('goal_amount');
+            $table->boolean('show_button')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

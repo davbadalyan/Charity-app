@@ -50,6 +50,24 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @mixin \Eloquent
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
  * @property-read int|null $media_count
+ * @property bool $show_foundation_status
+ * @property bool $show_button
+ * @property-read \App\Models\Post|null $post
+ * @property-read \App\Models\EventTranslation|null $translation
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EventTranslation[] $translations
+ * @property-read int|null $translations_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Event listsTranslations(string $translationField)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event notTranslatedIn(?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event orWhereTranslation(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event orWhereTranslationLike(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event orderByTranslation(string $translationField, string $sortMethod = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Event translated()
+ * @method static \Illuminate\Database\Eloquent\Builder|Event translatedIn(?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereShowButton($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereShowFoundationStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereTranslation(string $translationField, $value, ?string $locale = null, string $method = 'whereHas', string $operator = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereTranslationLike(string $translationField, $value, ?string $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event withTranslation()
  */
 class Event extends Model implements HasMedia, TranslatableContract
 {
@@ -67,6 +85,13 @@ class Event extends Model implements HasMedia, TranslatableContract
         'start_date',
         'raised_amount',
         'goal_amount',
+        'show_foundation_status',
+        'show_button',
+    ];
+
+    protected $casts = [
+        'show_button' => 'bool',
+        'show_foundation_status' => 'bool',
     ];
 
     public function post()

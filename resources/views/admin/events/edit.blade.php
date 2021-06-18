@@ -61,6 +61,17 @@
         </div>
 
         <div class="form-group">
+            <b><p>Show foundation status</p></b>
+            <label>Yes</label>
+            <input name="show_foundation_status" value="Yes" type="radio">
+            <label>No</label>
+            <input name="show_foundation_status" value="No" type="radio">
+            @error('show_foundation_status')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="form-group">
             <label>Start Date</label>
             <input class="form-control" name="start_date" value="{{ $event->start_date }}" type="date">
             @error('start_date')
@@ -87,7 +98,17 @@
         </div>
 
         <div class="form-group">
+            <b><p>Show button</p></b>
+            <label>Yes</label>
+            <input name="show_button" value="Yes" type="radio">
+            <label>No</label>
+            <input name="show_button" value="No" type="radio">
+            @error('show_button')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
 
+        <div class="form-group">
             <label>Image</label>
             <input class="form-control" accept="image/*" name="file[]" type="file" multiple maxlength="7">
             @error('file')
