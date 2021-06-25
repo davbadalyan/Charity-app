@@ -29,6 +29,8 @@
 
                     <div class="form-group">
                         <label>Title {{ $locale }}</label>
+
+
                         <input class="form-control" name="{{ $locale }}[title]" value="{{ old($locale . '.title') }}"
                             type="text">
                         @error($locale . '.title')
@@ -52,11 +54,12 @@
         @endforelse
 
         <div class="form-group">
-            <label>Promo_code</label>
+            {{-- <label>Promo_code</label>
             <input class="form-control" name="promo_code" value="{{ old('promo_code') }}" type="text">
             @error('promo_code')
                 <span class="text-danger">{{ $message }}</span>
-            @enderror
+            @enderror --}}
+            <x-input placeholder='new' class="form-control-lg" title="Promo code" name="promo_code"  />
         </div>
 
         {{-- <div class="form-group">

@@ -2,29 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        // $user = User::whereEmail()
-        return view('home');
+        $activeEvents = Event::latest()->limit(3)->get();
+
+        return view('index')->with(compact('activeEvents'));
+    }
+
+    public function posts()
+    {
+        return view('posts');
+    }
+
+    public function show()
+    {
+        return view('post_single');
+    }
+
+    public function about()
+    {
+        return view('about');
     }
 }

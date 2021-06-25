@@ -3,10 +3,9 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <div class="d-flex justify-content-between">
-        <h1 class="m-0 text-dark">Events</h1>
-        <a href="{{ route('admin.events.create') }}" class="btn btn-primary">Create</a>
-    </div>
+  
+    @include("admin.shared.card_header", ['title' => "Events", "createURL" => route('admin.events.create')])
+
 @stop
 
 @section('card-content')

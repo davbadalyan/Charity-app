@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\View\Components\Input;
 use Astrotomic\Translatable\Locales;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Locales $locales)
     {
         View::composer('*', fn ($view) => $view->with('locales', $locales->all()));
+
+        // Blade::component('input', Input::class);
     }
 }
