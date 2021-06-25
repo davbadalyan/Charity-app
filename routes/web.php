@@ -12,10 +12,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', function () {
-    return view('home');
+    return view('admin.home');
 })->name('home')->middleware('auth');
 
 Route::post('/lang', [LocalizationController::class, 'setLanguage'])->name('lang.set');
@@ -39,14 +38,9 @@ Route::group(
         'middleware' => ['localeCookieRedirect', 'localizationRedirect']
     ],
     function () {
-        Route::get('/welcome', function () {
-            
-            return view('welcome')->with('event', Event::find(11));
-        });
-
-        Route::get('/posts', function () {
-            
-            return view('posts');
-        })->name('posts');
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+        Route::get('/posts', [App\Http\Controllers\HomeController::class, 'posts'])->name('posts');
+        Route::get('/posts/{posts}', [App\Http\Controllers\HomeController::class, 'show'])->name('posts.single');
+        Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
     }
 );

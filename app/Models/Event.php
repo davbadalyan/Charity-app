@@ -98,4 +98,9 @@ class Event extends Model implements HasMedia, TranslatableContract
     {
         return $this->hasOne(Post::class);
     }
+
+    public function getProgressAttribute()
+    {
+        return ($this->raised_amount / $this->goal_amount) * 100;
+    }
 }
