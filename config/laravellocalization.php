@@ -42,12 +42,12 @@ return [
         //'et'          => ['name' => 'Estonian',               'script' => 'Latn', 'native' => 'eesti', 'regional' => 'et_EE'],
         //'na'          => ['name' => 'Nauru',                  'script' => 'Latn', 'native' => 'Ekakairũ Naoero', 'regional' => ''],
         //'guz'         => ['name' => 'Ekegusii',               'script' => 'Latn', 'native' => 'Ekegusii', 'regional' => ''],
-        'en'          => ['name' => 'English',                'script' => 'Latn', 'native' => 'English', 'regional' => 'en_GB'],
+        'en'          => ['name' => 'Eng',                'script' => 'Latn', 'native' => 'English', 'regional' => 'en_GB'],
         //'en-AU'       => ['name' => 'Australian English',     'script' => 'Latn', 'native' => 'Australian English', 'regional' => 'en_AU'],
         //'en-GB'       => ['name' => 'British English',        'script' => 'Latn', 'native' => 'British English', 'regional' => 'en_GB'],
         //'en-CA'       => ['name' => 'Canadian English',       'script' => 'Latn', 'native' => 'Canadian English', 'regional' => 'en_CA'],
         //'en-US'       => ['name' => 'U.S. English',           'script' => 'Latn', 'native' => 'U.S. English', 'regional' => 'en_US'],
-        'es'          => ['name' => 'Spanish',                'script' => 'Latn', 'native' => 'español', 'regional' => 'es_ES'],
+        // 'es'          => ['name' => 'Spanish',                'script' => 'Latn', 'native' => 'español', 'regional' => 'es_ES'],
         //'eo'          => ['name' => 'Esperanto',              'script' => 'Latn', 'native' => 'esperanto', 'regional' => ''],
         //'eu'          => ['name' => 'Basque',                 'script' => 'Latn', 'native' => 'euskara', 'regional' => 'eu_ES'],
         //'ewo'         => ['name' => 'Ewondo',                 'script' => 'Latn', 'native' => 'ewondo', 'regional' => ''],
@@ -222,7 +222,7 @@ return [
         //'mk'          => ['name' => 'Macedonian',             'script' => 'Cyrl', 'native' => 'македонски', 'regional' => 'mk_MK'],
         //'mn'          => ['name' => 'Mongolian (Cyrillic)',   'script' => 'Cyrl', 'native' => 'монгол', 'regional' => 'mn_MN'],
         //'ce'          => ['name' => 'Chechen',                'script' => 'Cyrl', 'native' => 'нохчийн мотт', 'regional' => 'ce_RU'],
-        'ru'          => ['name' => 'Russian',                'script' => 'Cyrl', 'native' => 'русский', 'regional' => 'ru_RU'],
+        'ru'          => ['name' => 'Рус',                'script' => 'Cyrl', 'native' => 'русский', 'regional' => 'ru_RU'],
         //'sah'         => ['name' => 'Yakut',                  'script' => 'Cyrl', 'native' => 'саха тыла', 'regional' => ''],
         //'tt'          => ['name' => 'Tatar',                  'script' => 'Cyrl', 'native' => 'татар теле', 'regional' => 'tt_RU'],
         //'tg'          => ['name' => 'Tajik (Cyrillic)',       'script' => 'Cyrl', 'native' => 'тоҷикӣ', 'regional' => 'tg_TJ'],
@@ -231,7 +231,7 @@ return [
         //'cv'          => ['name' => 'Chuvash',                'script' => 'Cyrl', 'native' => 'чӑваш чӗлхи', 'regional' => 'cv_RU'],
         //'cu'          => ['name' => 'Church Slavic',          'script' => 'Cyrl', 'native' => 'ѩзыкъ словѣньскъ', 'regional' => ''],
         //'kk'          => ['name' => 'Kazakh',                 'script' => 'Cyrl', 'native' => 'қазақ тілі', 'regional' => 'kk_KZ'],
-        'hy'          => ['name' => 'Armenian',               'script' => 'Armn', 'native' => 'Հայերեն', 'regional' => 'hy_AM'],
+        'hy'          => ['name' => 'Հայ',               'script' => 'Armn', 'native' => 'Հայերեն', 'regional' => 'hy_AM'],
         //'yi'          => ['name' => 'Yiddish',                'script' => 'Hebr', 'native' => 'ייִדיש', 'regional' => 'yi_US'],
         //'he'          => ['name' => 'Hebrew',                 'script' => 'Hebr', 'native' => 'עברית', 'regional' => 'he_IL'],
         //'ug'          => ['name' => 'Uyghur',                 'script' => 'Arab', 'native' => 'ئۇيغۇرچە', 'regional' => 'ug_CN'],
@@ -342,6 +342,6 @@ return [
 
     // URLs which should not be processed, e.g. '/nova', '/nova/*', '/nova-api/*' or specific application URLs
     // Defaults to []
-    'urlsIgnored' => ['/skipped'],
+    'urlsIgnored' => ['/admin/*'],
 
 ];

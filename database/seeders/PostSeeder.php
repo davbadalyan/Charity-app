@@ -14,6 +14,10 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory(10)->create();
+        Post::factory(10)->create()->map(function (Post $event){
+            $event->addMedia(public_path('images/events/1.jpg'))->preservingOriginal()->toMediaCollection();
+            $event->addMedia(public_path('images/events/2.jpg'))->preservingOriginal()->toMediaCollection();
+            $event->addMedia(public_path('images/events/3.jpg'))->preservingOriginal()->toMediaCollection();
+        });;
     }
 }
