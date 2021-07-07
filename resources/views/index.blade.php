@@ -78,7 +78,7 @@
         </div>
     </section>
 
-    @include("includes.posts")
+    @include("includes.posts", compact('posts'))
     @include("includes.events", compact('activeEvents'))
     @include("includes.account")
     @include("includes.mission")

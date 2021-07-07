@@ -17,7 +17,8 @@ Route::get('/home', function () {
     return view('admin.home');
 })->name('home')->middleware('auth');
 
-Route::post('/lang', [LocalizationController::class, 'setLanguage'])->name('lang.set');
+// Route::post('/lang', [LocalizationController::class, 'setLanguage'])->name('lang.set');
+Route::get('/lang', [LocalizationController::class, 'setLanguage'])->name('lang.set');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin.'], function () {
 
@@ -40,7 +41,7 @@ Route::group(
     function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
         Route::get('/posts', [App\Http\Controllers\HomeController::class, 'posts'])->name('posts');
-        Route::get('/posts/{posts}', [App\Http\Controllers\HomeController::class, 'show'])->name('posts.single');
+        Route::get('/posts/{post}', [App\Http\Controllers\HomeController::class, 'show'])->name('posts.single');
         Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
     }
 );

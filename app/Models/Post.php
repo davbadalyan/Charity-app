@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Services\ImageService;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -88,5 +89,10 @@ class Post extends Model implements HasMedia, TranslatableContract
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function scopeRelevant(Builder $query)
+    {
+        return $query->latest()->limit(50)->get()->random(3);
     }
 }

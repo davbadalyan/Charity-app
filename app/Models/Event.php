@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +10,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 use Astrotomic\Translatable\Translatable;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 //@property \App\Services\ImageService $imageService
 
 /**
@@ -68,6 +68,8 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @method static \Illuminate\Database\Eloquent\Builder|Event whereTranslation(string $translationField, $value, ?string $locale = null, string $method = 'whereHas', string $operator = '=')
  * @method static \Illuminate\Database\Eloquent\Builder|Event whereTranslationLike(string $translationField, $value, ?string $locale = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Event withTranslation()
+ * @property-read mixed $progress
+ * @method static Builder|Event active(int $limit = 3)
  */
 class Event extends Model implements HasMedia, TranslatableContract
 {
@@ -102,5 +104,16 @@ class Event extends Model implements HasMedia, TranslatableContract
     public function getProgressAttribute()
     {
         return ($this->raised_amount / $this->goal_amount) * 100;
+    }
+
+    public function scopeActive(Builder $query, int $limit = 3)
+    {
+        return $query->latest()->limit($limit);
+    }
+
+    public function scopePromo(Builder $query, string $promo)
+    {
+        $promo = "#".Str::replace('#', '', $promo);
+        return $query->where('promo_code', $promo);
     }
 }

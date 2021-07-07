@@ -21,9 +21,9 @@
 
     <div class="menu-window">
         <ul class="menu-list-mobile">
-            <li><a href="{{ route('index') }}">Home</a></li>
-            <li><a href="{{ route('about') }}">About</a></li>
-            <li><a href="{{ route('posts') }}">Posts</a></li>
+            <li><a href="{{ route('index') }}">{{ __('navbar.home') }}</a></li>
+            <li><a href="{{ route('about') }}">{{ __('navbar.about') }}</a></li>
+            <li><a href="{{ route('posts') }}">{{ __('navbar.posts') }}</a></li>
         </ul>
     </div>
 
@@ -35,20 +35,23 @@
         </div>
         <div class="btn-group language-drops">
             <ul class="menu-list">
-                <li><a href="{{ route('index') }}">Home</a></li>
-                <li><a href="{{ route('about') }}">About</a></li>
-                <li class="end-line"><a href="{{ route('posts') }}">Posts</a></li>
-                <li><a href="#account-number" class="dropdown-item">Donate</a></li>
-                <li class="p-0 ml-1"><a class="dropdown-item" href="#mission">Mission</a></li>
-                <li class="p-0"><a class="dropdown-item" href="#events">Events</a></li>
+                <li><a href="{{ route('index') }}">{{ __('navbar.home') }}</a></li>
+                <li><a href="{{ route('about') }}">{{ __('navbar.about') }}</a></li>
+                <li class="end-line"><a href="{{ route('posts') }}">{{ __('navbar.posts') }}</a></li>
+                <li><a href="{{ route('index') }}#account-number" class="dropdown-item">{{ __('navbar.donate') }}</a></li>
+                <li class="p-0 ml-1"><a class="dropdown-item" href="{{ route('index') }}#mission">{{ __('navbar.mission') }}</a></li>
+                <li class="p-0"><a class="dropdown-item" href="{{ route('index') }}#events">{{ __('navbar.events') }}</a></li>
             </ul>
             <button type="button" class="btn btn-lang-drop dropdown-toggle" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                ENG
+                {{ $currentLocale['name'] }}
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Рус</a></li>
-                <li><a class="dropdown-item" href="#">Հայ</a></li>
+                @forelse ($selectableLocales as $key => $l)
+                    <li><a class="dropdown-item" href="{{ route('lang.set', ['lang' => $key]) }}">{{ $l['name'] }}</a></li>
+                @empty
+
+                @endforelse
             </ul>
             <button class="menu-btn">
                 <i class="fas fa-bars"></i>
@@ -58,15 +61,14 @@
 
     <header>
         <div class="content-window">
-            <h2>Haruma</h2>
-            <h1>
-                He Who Has No Charity In Life No Mercy
-            </h1>
+            <h2>{{ __('common.home_first') }}</h2>
+            <h1>{{ __('common.home_second') }}</h1>
         </div>
         <div id="headerCarousel" class="image-window carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="courusel-image d-block w-100" src="./images/header/main.png" alt="First slide">
+                    <img class="courusel-image d-block w-100" src="{{ asset('/images/header/main.png') }}"
+                        alt="First slide">
                 </div>
                 <div class="carousel-item">
                     <img class="courusel-image d-block w-100"
@@ -97,7 +99,7 @@
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <!-- Left -->
             <div class="me-5 d-none d-lg-block">
-                <span>Get connected with us on social networks:</span>
+                <span>{{ __('footer.social') }}</span>
             </div>
             <!-- Left -->
 
@@ -135,12 +137,9 @@
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                         <!-- Content -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Company name
+                            <i class="fas fa-gem me-3"></i>{{ __('footer.company_name') }}
                         </h6>
-                        <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
-                        </p>
+                        <p>{{ __('footer.footer_content') }}</p>
                     </div>
                     <!-- Grid column -->
 
@@ -148,7 +147,7 @@
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            Products
+                            {{ __('footer.products') }}
                         </h6>
                         <p>
                             <a href="#!" class="text-reset">Angular</a>
@@ -169,19 +168,19 @@
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
+                            {{ __('footer.useful_links') }}
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Pricing</a>
+                            <a href="#!" class="text-reset">{{ __('footer.pricing') }}</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Settings</a>
+                            <a href="#!" class="text-reset">{{ __('footer.settings') }}</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Orders</a>
+                            <a href="#!" class="text-reset">{{ __('footer.orders') }}</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Help</a>
+                            <a href="#!" class="text-reset">{{ __('footer.help') }}</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -190,7 +189,7 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            Contact
+                            {{ __('footer.contact') }}
                         </h6>
                         <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
                         <p>

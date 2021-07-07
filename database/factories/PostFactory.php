@@ -30,7 +30,8 @@ class PostFactory extends Factory
             'title' => $this->faker->text(10),
             'short_description' => $this->faker->text(),
             'description' => $this->faker->text(1000),
-            'event_id' => $randomEventId
+            'event_id' => $randomEventId,
+            // 'created_at' => $this->faker->date(),
         ];
     }
 }
