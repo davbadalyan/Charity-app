@@ -16,11 +16,11 @@ class Input extends Component
      *
      * @return void
      */
-    public function __construct(string $title, string $name = '')
+    public function __construct(string $title, string $name = '', $default = null)
     {
         $this->name = $name;
         $this->title = $title;
-        $this->default = '';
+        $this->default = $default;
     }
 
     // public function hasError(): bool

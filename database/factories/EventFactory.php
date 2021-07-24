@@ -23,7 +23,7 @@ class EventFactory extends Factory
     public function definition()
     {
         return [
-            'promo_code' => '#' . Str::random(1) . $this->faker->numberBetween($min = 10000, $max = 99999) . Str::random(1),
+            'promo_code' => '#' . Str::random(1) . $this->faker->numberBetween($min = 100000, $max = 999999) . Str::random(1),
             'start_date' => now(),
             'raised_amount' => $this->faker->numberBetween($min = 0, $max = 1000),
             'goal_amount' => $this->faker->numberBetween($min = 0, $max = 5000),

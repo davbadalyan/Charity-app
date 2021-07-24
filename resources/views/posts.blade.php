@@ -11,10 +11,11 @@
                     <label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                              <div class="input-group-text">#</div>
+                                <div class="input-group-text">#</div>
                             </div>
-                            <input class="date-pickers" name="search" value="{{ request('search') }}" type="search" placeholder="Promo Code...">
-                          </div>
+                            <input class="date-pickers" name="search" value="{{ request('search') }}" type="search"
+                                placeholder="Promo Code...">
+                        </div>
                     </label>
                     <label>
                         <button class="btn sm btn-success">{{ __('common.search') }}</button>
@@ -48,8 +49,8 @@
                                         <h4>{{ $post->title }}</h4>
 
                                         <p>{{ $post->short_description }}</p>
-                                        <a href="{{ route('posts.single', compact('post')) }}">{{ __('common.read_more') }} <i
-                                                class="fas fa-chevron-right"></i></a>
+                                        <a href="{{ route('posts.single', compact('post')) }}">{{ __('common.read_more') }}
+                                            <i class="fas fa-chevron-right"></i></a>
                                     </div>
                                 </div>
                             </div>

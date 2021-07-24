@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Short_description {{ $locale }}</label>
+                        <label>Short description {{ $locale }}</label>
                         <input class="form-control" name="{{ $locale }}[short_description]"
                             value="{{ old($locale . '.short_description', $event->translate($locale)->short_description ?? '') }}"
                             type="text">
@@ -61,22 +61,24 @@
         </div>
 
         <div class="form-group">
-            <b><p>Show foundation status</p></b>
-            <label>Yes</label>
-            <input name="show_foundation_status" value="Yes" type="radio">
-            <label>No</label>
-            <input name="show_foundation_status" value="No" type="radio">
+            {{-- <div class="custom-switch">
+                <input type="checkbox" name="show_foundation_status" value="1" class="custom-control-input"
+                    id="show-foundation-status">
+                <label class="custom-control-label" for="show-foundation-status">Show foundation status.</label>
+            </div> --}}
+            <x-dg-input-switch label="Show foundation status." name="show_foundation_status" id="show-status" checked="{{ old('show_foundation_status', $event->show_foundation_status) == 'on' }}"/>
             @error('show_foundation_status')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="form-group">
-            <label>Start Date</label>
-            <input class="form-control" name="start_date" value="{{ $event->start_date }}" type="date">
+            {{-- <label>Start Date</label>
+            <input class="form-control" name="start_date" value="{{ old('start_date', $event->start_date) }}" type="date">
             @error('start_date')
                 <span class="text-danger">{{ $message }}</span>
-            @enderror
+            @enderror --}}
+            <x-input class="form-control" title="Start date" name="start_date" type="date" :default="$event->start_date"/>
         </div>
 
         <div class="form-group">
@@ -98,11 +100,11 @@
         </div>
 
         <div class="form-group">
-            <b><p>Show button</p></b>
-            <label>Yes</label>
-            <input name="show_button" value="Yes" type="radio">
-            <label>No</label>
-            <input name="show_button" value="No" type="radio">
+            {{-- <div class="custom-switch">
+                <input type="checkbox" name="show_button" value="1" class="custom-control-input" id="show-btn-switch">
+                <label class="custom-control-label" for="show-btn-switch">Show 'Donate now' button status.</label>
+            </div> --}}
+            <x-dg-input-switch label="Donate now' button status." name="show_button" id="show-button" checked="{{ old('show_button', $event->show_button) == 'on' }}"/>
             @error('show_button')
                 <span class="text-danger">{{ $message }}</span>
             @enderror

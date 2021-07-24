@@ -48,10 +48,10 @@ class EventController extends Controller
     public function store(EventStoreRequest $request)
     {
 
-        $data = $request->except(['file', '_token']);
+        $data = $request->except(['file', '_token', 'show_foundation_status', 'show_button']);
 
         /** @var  \App\Models\Event $event */
-        $event = Event::create($data);
+        $event = Event::create($data + ['show_foundation_status' => $request->has('show_foundation_status'), 'show_button' => $request->has('show_button')]);
 
         $event->addAllMediaFromRequest('file')->each(fn ($fileAdder) => $fileAdder->toMediaCollection());
 
@@ -89,9 +89,9 @@ class EventController extends Controller
      */
     public function update(EventUpdateRequest $request, Event $event)
     {
-        $data = $request->except(['file', '_token']);
+        $data = $request->except(['file', '_token', 'show_foundation_status', 'show_button']);
 
-        $event->update($data);
+        $event->update($data + ['show_foundation_status' => $request->has('show_foundation_status'), 'show_button' => $request->has('show_button')]);
         $event->addAllMediaFromRequest('file')->each(fn ($fileAdder) => $fileAdder->toMediaCollection());
 
         return back()->withSuccess('Event updated.');
