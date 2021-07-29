@@ -10,11 +10,13 @@
 
                 @endforelse
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#post{{ $event->id }}" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#post{{ $event->id }}"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#post{{ $event->id }}" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#post{{ $event->id }}"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -39,7 +41,7 @@
             </p> --}}
             @if ($event->show_button)
                 <p class="m-0">
-                    <a href="#account-number" class="causes-item-donate-button">
+                    <a href="{{ route('index', ['#account-number']) }}" class="causes-item-donate-button">
                         <span>Donate Now</span>
                         <i class="fas fa-plus"></i>
                     </a>

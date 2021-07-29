@@ -38,9 +38,8 @@
 
                     <div class="form-group">
                         <label>Short description {{ $locale }}</label>
-                        <input class="form-control" name="{{ $locale }}[short_description]"
-                            value="{{ old($locale . '.short_description', $event->translate($locale)->short_description ?? '') }}"
-                            type="text">
+                        <textarea name="{{ $locale }}[short_description]"
+                            class="form-control">{{ old($locale . '.short_description', $event->translate($locale)->short_description ?? '') }}</textarea>
                         @error($locale . '.short_description')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -66,7 +65,8 @@
                     id="show-foundation-status">
                 <label class="custom-control-label" for="show-foundation-status">Show foundation status.</label>
             </div> --}}
-            <x-dg-input-switch label="Show foundation status." name="show_foundation_status" id="show-status" checked="{{ old('show_foundation_status', $event->show_foundation_status) == 'on' }}"/>
+            <x-dg-input-switch label="Show foundation status." name="show_foundation_status" id="show-status"
+                checked="{{ old('show_foundation_status', $event->show_foundation_status) == 'on' }}" />
             @error('show_foundation_status')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
@@ -78,7 +78,7 @@
             @error('start_date')
                 <span class="text-danger">{{ $message }}</span>
             @enderror --}}
-            <x-input class="form-control" title="Start date" name="start_date" type="date" :default="$event->start_date"/>
+            <x-input class="form-control" title="Start date" name="start_date" type="date" :default="$event->start_date" />
         </div>
 
         <div class="form-group">
@@ -104,7 +104,8 @@
                 <input type="checkbox" name="show_button" value="1" class="custom-control-input" id="show-btn-switch">
                 <label class="custom-control-label" for="show-btn-switch">Show 'Donate now' button status.</label>
             </div> --}}
-            <x-dg-input-switch label="Donate now' button status." name="show_button" id="show-button" checked="{{ old('show_button', $event->show_button) == 'on' }}"/>
+            <x-dg-input-switch label="Donate now' button status." name="show_button" id="show-button"
+                checked="{{ old('show_button', $event->show_button) == 'on' }}" />
             @error('show_button')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
@@ -143,8 +144,10 @@
                     <div class="card col-lg-3 col-sm-6 col-xs-12 my-2">
                         <img class="card-img-top" src="{{ $media->getUrl() }}" alt="" />
                         <div class="card-img-overlay d-flex align-items-start justify-content-end">
-                            <a href="{{ $media->getUrl() }}" target="_blank" class="btn btn-sm btn-success"><i
-                                    class="fa fa-eye"></i></a>
+                            <a href="{{ route('admin.events.media.main-image', ['event' => $event, 'media' => $media]) }}"
+                                class="btn btn-sm btn-success" title="Set Main Image"><i class="fa fa-image"></i></a>
+                            <a href="{{ $media->getUrl() }}" target="_blank" class="ml-2 btn btn-sm btn-success"
+                                title="View"><i class="fa fa-eye"></i></a>
                             <form action="{{ route('admin.media.delete', ['media' => $media]) }}" method="POST">
                                 @method('DELETE')
                                 @csrf

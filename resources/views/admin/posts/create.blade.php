@@ -18,29 +18,51 @@
 
     <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="form-group">
-            <label>Title</label>
-            <input class="form-control" name="title" value="{{ old('title') }}" type="text">
-            @error('title')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
 
-        <div class="form-group">
-            <label>Short_description</label>
-            <input class="form-control" name="short_description" value="{{ old('short_description') }}" type="text">
-            @error('short_description')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
+        @forelse ($locales as $locale)
+            <div class="card card-widget mt-4">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>{{ $locale }}</h3>
+                    </div>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-2x fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Title {{ $locale }}</label>
+                        <input class="form-control" name="{{ $locale }}[title]"
+                            value="{{ old($locale . '.title') }}" type="text">
+                        @error($locale . '.title')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
 
-        <div class="form-group">
-            <label>Description</label>
-            <input class="form-control" name="description" value="{{ old('description') }}" type="text">
-            @error('description')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
+                    <div class="form-group">
+                        <label>Short description {{ $locale }}</label>
+                        <textarea name="{{ $locale }}[short_description]"
+                            class="form-control">{{ old($locale . '.short_description') }}</textarea>
+                        @error($locale . '.short_description')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description {{ $locale }}</label>
+                        <textarea name="{{ $locale }}[description]"
+                            class="form-control">{{ old($locale . '.description') }}</textarea>
+                        @error($locale . '.description')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+        @empty
+            <h3 class="text-danger">Locales not found, please check configs</h3>
+        @endforelse
 
         <div class="form-group">
             <label>Event</label>
@@ -75,11 +97,10 @@
 
 
 @section('js')
-    <script>
-        $('select').change(function() {
-            $('#alert').text('This post will be created for ' + $(this).find("option[value=" + $(this).val() + "]")
-                .data('title'));
-        });
-
-    </script>
+<script>
+    $('select').change(function() {
+        $('#alert').text('This post will be created for ' + $(this).find("option[value=" + $(this).val() + "]")
+            .data('title'));
+    });
+</script>
 @endsection

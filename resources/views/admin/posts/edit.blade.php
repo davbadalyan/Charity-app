@@ -119,12 +119,16 @@
                     <div class="card col-lg-3 col-sm-6 col-xs-12 my-2">
                         <img class="card-img-top" src="{{ $media->getUrl() }}" alt="" />
                         <div class="card-img-overlay d-flex align-items-start justify-content-end">
-                            <a href="{{ $media->getUrl() }}" target="_blank" class="btn btn-sm btn-success"><i
+                            <a href="{{ route('admin.posts.media.main-image', ['post' => $post, 'media' => $media]) }}"
+                                class="btn btn-sm btn-success"><i class="fa fa-image"></i></a>
+                            <a href="{{ $media->getUrl() }}" target="_blank" class="ml-1 btn btn-sm btn-success"><i
                                     class="fa fa-eye"></i></a>
-                            <form action="{{ route('admin.media.delete', ['media' => $media]) }}" method="POST">
+                            <form id="del-form-{{ $media->id }}"
+                                action="{{ route('admin.media.delete', ['media' => $media]) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <button class="ml-1 btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                <button form="del-form-{{ $media->id }}" class="ml-1 btn btn-sm btn-danger"><i
+                                        class="fa fa-times"></i></button>
                             </form>
                         </div>
                     </div>

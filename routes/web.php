@@ -28,6 +28,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin.'], fu
 
     Route::resource('volunteers', VolunteerController::class);
 
+    Route::get('/media/set_main_posts/{post}/{media}', [MediaController::class, 'setPostMainImage'])->name('posts.media.main-image');
+    Route::get('/media/set_main_events/{event}/{media}', [MediaController::class, 'setEventMainImage'])->name('events.media.main-image');
     Route::delete('/media/{media}', [MediaController::class, 'delete'])->name('media.delete');
 
     Route::post('/volunteers/send-email', [VolunteerController::class, 'sendEmail'])->name('volunteers-send-email');

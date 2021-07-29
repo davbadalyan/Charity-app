@@ -38,8 +38,8 @@
 
                     <div class="form-group">
                         <label>Short description {{ $locale }}</label>
-                        <input class="form-control" name="{{ $locale }}[short_description]"
-                            value="{{ old($locale . '.short_description') }}" type="text">
+                        <textarea name="{{ $locale }}[short_description]"
+                            class="form-control">{{ old($locale . '.short_description') }}</textarea>
                         @error($locale . '.short_description')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -62,67 +62,31 @@
             @error('promo_code')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
-            {{-- <x-input placeholder='new' class="form-control-lg" title="Promo code" name="promo_code"  /> --}}
         </div>
 
-        {{-- <div class="form-group">
-            <b><p>Show foundation status</p></b>
-            <label>Yes</label>
-            <input name="show_foundation_status" value="Yes" type="radio">
-            <label>No</label>
-            <input name="show_foundation_status" value="No" type="radio">
-            @error('show_foundation_status')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div> --}}
-
         <div class="form-group">
-            {{-- <div class="custom-switch">
-                <input type="checkbox" name="show_foundation_status" value="1" class="custom-control-input"
-                    id="show-foundation-status">
-                <label class="custom-control-label" for="show-foundation-status">Show foundation status.</label>
-            </div> --}}
-            <x-dg-input-switch label="Show foundation status." name="show_foundation_status" id="show-status" checked="{{ old('show_foundation_status') == 'on' }}"/>
+            <x-dg-input-switch label="Show foundation status." name="show_foundation_status" id="show-status"
+                checked="{{ old('show_foundation_status') == 'on' }}" />
             @error('show_foundation_status')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="form-group">
-            {{-- <label>Start_date</label>
-            <input class="form-control" name="start_date" value="{{ old('start_date') }}" type="date">
-            @error('start_date')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror --}}
             <x-input class="form-control" title="Start date" name="start_date" type="date" />
         </div>
 
         <div class="form-group">
-            {{-- <label>Raised_amount</label>
-            <input class="form-control" name="raised_amount" value="{{ old('raised_amount') }}" type="number" min="0"
-                max="99999">
-            @error('raised_amount')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror --}}
             <x-input class="form-control" title="Raised amount" name="raised_amount" type="number" />
         </div>
 
         <div class="form-group">
-            {{-- <label>Goal_amount</label>
-            <input class="form-control" name="goal_amount" value="{{ old('goal_amount') }}" type="number" min="0"
-                max="99999">
-            @error('goal_amount')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror --}}
             <x-input class="form-control" title="Goal amount" name="goal_amount" type="number" />
         </div>
 
         <div class="form-group">
-            {{-- <div class="custom-switch">
-                <input type="checkbox" name="show_button" value="1" class="custom-control-input" id="show-btn-switch">
-                <label class="custom-control-label" for="show-btn-switch">Show 'Donate now' button status.</label>
-            </div> --}}
-            <x-dg-input-switch label="Donate now' button status." name="show_button" id="show-button" checked="{{ old('show_button') == 'on' }}"/>
+            <x-dg-input-switch label="Donate now' button status." name="show_button" id="show-button"
+                checked="{{ old('show_button') == 'on' }}" />
             @error('show_button')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
@@ -144,12 +108,11 @@
 @stop
 
 @section('js')
-    <script>
-        
-        window.onload = function (){
-            document.querySelector("button.promo-generator").addEventListener('click', (e) => {
-                document.getElementById("promo").value = "#" + Math.random().toString(36).slice(-8);
-            });
-        };    
-    </script>  
+<script>
+    window.onload = function() {
+        document.querySelector("button.promo-generator").addEventListener('click', (e) => {
+            document.getElementById("promo").value = "#" + Math.random().toString(36).slice(-8);
+        });
+    };
+</script>
 @endsection
