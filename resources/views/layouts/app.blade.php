@@ -6,6 +6,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:type" content="website">
+    <title>New Armenia</title>
+    <meta property="og:title" content="">
+    <meta property="description" content="">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://new-armenia.org/">
+    <meta property="og:site_name" content="New Armenia">
+    <meta property="og:image" content="">
+    <meta property="og:image:secure_url" content="">
+    <meta name="theme-color" content="#FF6300">
+
     <!-- Bootstrap CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -13,7 +25,7 @@
     <link href="{{ asset('fontawesome/css/all.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
 
-    <title>@yield('title', "Charity App")</title>
+    <title>@yield('title', "New Armenia")</title>
 </head>
 
 <body>
