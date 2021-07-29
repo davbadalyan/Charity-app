@@ -38,9 +38,12 @@
                 <li><a href="{{ route('index') }}">{{ __('navbar.home') }}</a></li>
                 <li><a href="{{ route('about') }}">{{ __('navbar.about') }}</a></li>
                 <li class="end-line"><a href="{{ route('posts') }}">{{ __('navbar.posts') }}</a></li>
-                <li><a href="{{ route('index') }}#account-number" class="dropdown-item">{{ __('navbar.donate') }}</a></li>
-                <li class="p-0 ml-1"><a class="dropdown-item" href="{{ route('index') }}#mission">{{ __('navbar.mission') }}</a></li>
-                <li class="p-0"><a class="dropdown-item" href="{{ route('index') }}#events">{{ __('navbar.events') }}</a></li>
+                <li><a href="{{ route('index') }}#account-number"
+                        class="dropdown-item">{{ __('navbar.donate') }}</a></li>
+                <li class="p-0 ml-1"><a class="dropdown-item"
+                        href="{{ route('index') }}#mission">{{ __('navbar.mission') }}</a></li>
+                <li class="p-0"><a class="dropdown-item"
+                        href="{{ route('index') }}#events">{{ __('navbar.events') }}</a></li>
             </ul>
             <button type="button" class="btn btn-lang-drop dropdown-toggle" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -48,7 +51,8 @@
             </button>
             <ul class="dropdown-menu">
                 @forelse ($selectableLocales as $key => $l)
-                    <li><a class="dropdown-item" href="{{ route('lang.set', ['lang' => $key]) }}">{{ $l['name'] }}</a></li>
+                    <li><a class="dropdown-item"
+                            href="{{ route('lang.set', ['lang' => $key]) }}">{{ $l['name'] }}</a></li>
                 @empty
 
                 @endforelse
@@ -219,7 +223,7 @@
 
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/popper.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}."></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/menu/menu.js') }}" type="module"></script>
     @stack('js')
 </body>
