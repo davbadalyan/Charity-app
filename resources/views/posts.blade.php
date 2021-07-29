@@ -6,8 +6,8 @@
         <h6 class="text-center header-small-text">{{ __('common.upcoming_events') }}</h6>
         <h1 class="text-center header-large-text ">{{ __('common.be_ready') }}</h1>
         <div class="container">
-            <div class="posts-filters input-group">
-                <form class="form-control justify-content-start" method="GET" action="#posts">
+            <div class="posts-filters d-flex align-items-center">
+                <form class="justify-content-start" method="GET" action="#posts">
                     <label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -21,7 +21,7 @@
                         <button class="btn sm btn-success">{{ __('common.search') }}</button>
                     </label>
                 </form>
-                <form class="form-control justify-content-end" method="GET" action="#posts">
+                <form class="justify-content-end" method="GET" action="#posts">
                     <label>
                         <input class="date-pickers" name='from' value="{{ request('from') }}" type="date">
                     </label>

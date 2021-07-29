@@ -29,7 +29,7 @@
 
     <nav id="menu">
         <div class="logotype-window">
-            <a href="index.html">
+            <a href="{{ route('index') }}">
                 <img id="image" src="{{ asset('images/logotype/logo.png') }}" alt="Charity App">
             </a>
         </div>
