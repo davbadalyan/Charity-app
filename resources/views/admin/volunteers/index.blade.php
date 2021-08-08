@@ -11,7 +11,7 @@
 
 @section('card-content')
 
-    <div class="col-lg-8 m-auto">
+    {{-- <div class="col-lg-8 m-auto">
         <h3>Send emails to ALL volunteers</h3>
         <form action="{{ route('admin.volunteers-send-email') }}" method="POST">
         
@@ -36,7 +36,7 @@
         </form>
     </div>
 
-    <hr />
+    <hr /> --}}
 
     <table class="table table-stripped dt">
         <thead>
@@ -45,6 +45,7 @@
                 <th>Email address</th>
                 <th>Phone</th>
                 <th>Message</th>
+                <th>Registration date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -55,15 +56,16 @@
                     <td>{{ $volunteer->email }}</td>
                     <td>{{ $volunteer->phone }}</td>
                     <td>{{ $volunteer->message }}</td>
+                    <td>{{ $volunteer->created_at }}</td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{ route('admin.volunteers.edit', ['volunteer' => $volunteer]) }}"
-                                class="btn btn-sm btn-info mr-2">Edit</a>
+                            {{-- <a href="{{ route('admin.volunteers.edit', ['volunteer' => $volunteer]) }}"
+                                class="btn btn-sm btn-info mr-2">Edit</a> --}}
                             <form action="{{ route('admin.volunteers.destroy', ['volunteer' => $volunteer, 'action' => 'delete']) }}"
                                 method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-sm btn-warning">Delete</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
                             </form>
                         </div>
                     </td>
@@ -78,7 +80,9 @@
 @section('js')
 
 <script>
-    $('.dt').DataTable();
+    $('.dt').DataTable({
+        order: [[4, "desc" ]]
+    });
 
 </script>
 

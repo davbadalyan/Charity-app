@@ -35,5 +35,10 @@ class Volunteer extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'full_name',
+        'email',
+        'phone',
+        'message'
+    ];
 }

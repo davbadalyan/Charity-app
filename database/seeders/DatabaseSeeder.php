@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MainSlider;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -14,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([UserSeeder::class, EventSeeder::class, PostSeeder::class, VolunteerSeeder::class]);
+        $this->call([UserSeeder::class, EventSeeder::class, PostSeeder::class, VolunteerSeeder::class, MainSliderSeeder::class]);
         // User::factory(10)->create();
     }
 }

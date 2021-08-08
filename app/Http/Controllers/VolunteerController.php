@@ -99,6 +99,8 @@ class VolunteerController extends Controller
      */
     public function destroy(Volunteer $volunteer)
     {
-        //
+        $volunteer->delete();
+
+        return back()->withSuccess('Volunteer deleted successfully');
     }
 }

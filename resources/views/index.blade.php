@@ -59,19 +59,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="post-item">
-                                <div class="post-item-content">
-                                    <h1 class="post-item-name">Quick Fundraiser</h1>
-                                    <p class="post-item-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elitsed do eiusmod tempor
-                                        incididun labore voluptatem accusantium.
-                                    </p>
-                                    <button class="post-item-button" data-toggle="modal" data-target="#services-modal">
-                                        Button <i class="fas fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

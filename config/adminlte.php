@@ -253,7 +253,12 @@ return [
         ],
         [
             'text' => 'Main Slider',
-            'url'  => 'admin/slider',
+            'url'  => 'admin/main_slider',
+            // 'can'  => 'manage-events',
+        ],
+        [
+            'text' => 'Volunteer / User Registration',
+            'url'  => 'admin/volunteers',
             // 'can'  => 'manage-events',
         ],
         // [

@@ -8,7 +8,6 @@
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="og:type" content="website">
-    <title>New Armenia</title>
     <meta property="og:title" content="">
     <meta property="description" content="">
     <meta property="og:description" content="">
@@ -82,19 +81,25 @@
         </div>
         <div id="headerCarousel" class="image-window carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="courusel-image d-block w-100" src="{{ asset('/images/header/main.png') }}"
-                        alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="courusel-image d-block w-100"
-                        src="https://media.istockphoto.com/photos/yerevan-capital-of-armenia-and-the-mount-ararat-picture-id627744150?k=6&m=627744150&s=612x612&w=0&h=6IIzYfZdjVRlP3oz7Zgxj5W8JO1a3rhpksY22XmLH_E="
-                        alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="courusel-image d-block w-100"
-                        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="Third slide">
-                </div>
+                @forelse ($mainSliderImages as $i => $image)
+                    <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
+                        <img class="courusel-image d-block w-100" src="{{ $image->getUrl() }}" alt="">
+                    </div>
+                @empty
+                    <div class="carousel-item active">
+                        <img class="courusel-image d-block w-100" src="{{ asset('/images/header/main.png') }}"
+                            alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="courusel-image d-block w-100"
+                            src="https://media.istockphoto.com/photos/yerevan-capital-of-armenia-and-the-mount-ararat-picture-id627744150?k=6&m=627744150&s=612x612&w=0&h=6IIzYfZdjVRlP3oz7Zgxj5W8JO1a3rhpksY22XmLH_E="
+                            alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="courusel-image d-block w-100"
+                            src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="Third slide">
+                    </div>
+                @endforelse
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\MainSlider;
 use App\View\Components\Input;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
@@ -31,7 +32,14 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $all = LaravelLocalization::getSupportedLocales();
             $current = $all[LaravelLocalization::getCurrentLocale()];
-            $view->with(['currentLocale' => $current, 'locales' => LaravelLocalization::getSupportedLanguagesKeys(), 'selectableLocales' => array_filter($all, fn ($lang) => $lang['name'] !== $current['name'])]);
+
+            $mainSliderImages = [];
+            $mainSlider = MainSlider::find(1);
+            if($mainSlider){
+                $mainSliderImages = $mainSlider->getMedia();
+            }
+
+            $view->with(['mainSliderImages' => $mainSliderImages, 'currentLocale' => $current, 'locales' => LaravelLocalization::getSupportedLanguagesKeys(), 'selectableLocales' => array_filter($all, fn ($lang) => $lang['name'] !== $current['name'])]);
         });
 
         // Blade::component('input', Input::class);

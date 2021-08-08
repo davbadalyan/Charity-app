@@ -1,0 +1,51 @@
+version: "3.9"
+services:
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: charity-app
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: appp
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    expose:
+      - "8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+    command: sh -c 'composer install && php artisan serve --host 0.0.0.0'
+    depends_on:
+      - db
+
+  #MySQL Service
+  db:
+    image: mysql/mysql-server:8.0.23
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    # driver: bridge
+#Volumes
+# volumes:
+#   dbdata:
+#     driver: local
