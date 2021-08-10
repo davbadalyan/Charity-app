@@ -150,7 +150,7 @@ nav > div.logotype-window img {
 	cursor: pointer;
 }
 
-.menu-list > li:hover {
+.menu-list > li:hover, .menu-list > li.active {
 	color: #FF6116;
 }
 
@@ -1437,7 +1437,7 @@ footer {
         cursor: pointer;
     }
 
-    .menu-list-mobile  li:hover {
+    .menu-list-mobile  li:hover, .menu-list-mobile li.active {
         background-color: rgba(0, 0, 0, .02);
         color: #FF6015;
     }

@@ -32,9 +32,12 @@
 
     <div class="menu-window">
         <ul class="menu-list-mobile">
-            <li><a href="{{ route('index') }}">{{ __('navbar.home') }}</a></li>
-            <li><a href="{{ route('about') }}">{{ __('navbar.about') }}</a></li>
-            <li><a href="{{ route('posts') }}">{{ __('navbar.posts') }}</a></li>
+            <li class="{{ request()->url() === route('index') ? 'active' : '' }}"><a
+                    href="{{ route('index') }}">{{ __('navbar.home') }}</a></li>
+            <li class="{{ request()->url() === route('about') ? 'active' : '' }}"><a
+                    href="{{ route('about') }}">{{ __('navbar.about') }}</a></li>
+            <li class="{{ request()->url() === route('posts') ? 'active' : '' }}"><a
+                    href="{{ route('posts') }}">{{ __('navbar.posts') }}</a></li>
         </ul>
     </div>
 
@@ -46,9 +49,12 @@
         </div>
         <div class="btn-group language-drops">
             <ul class="menu-list">
-                <li><a href="{{ route('index') }}">{{ __('navbar.home') }}</a></li>
-                <li><a href="{{ route('about') }}">{{ __('navbar.about') }}</a></li>
-                <li class="end-line"><a href="{{ route('posts') }}">{{ __('navbar.posts') }}</a></li>
+                <li class="{{ request()->url() === route('index') ? 'active' : '' }}"><a
+                        href="{{ route('index') }}">{{ __('navbar.home') }}</a></li>
+                <li class="{{ request()->url() === route('about') ? 'active' : '' }}"><a
+                        href="{{ route('about') }}">{{ __('navbar.about') }}</a></li>
+                <li class="end-line {{ request()->url() === route('posts') ? 'active' : '' }}"><a
+                        href="{{ route('posts') }}">{{ __('navbar.posts') }}</a></li>
                 <li><a href="{{ route('index') }}#account-number"
                         class="dropdown-item">{{ __('navbar.donate') }}</a></li>
                 <li class="p-0 ml-1"><a class="dropdown-item"
