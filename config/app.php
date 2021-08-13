@@ -2,6 +2,9 @@
 
 return [
 
+    'telegram_chat_id' => env("TELEGRAM_CHAT_ID"),
+    'telegram_api_key' => env("TELEGRAM_API_KEY"),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Channels\TelegramChannel;
 use App\Models\Volunteer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -32,7 +33,7 @@ class VolunteerRegisteredNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['database', TelegramChannel::class];
     }
 
     /**
@@ -44,8 +45,8 @@ class VolunteerRegisteredNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('A new volunteer just registered.')
-                    ->line('Thank you for using our application!');
+            ->line('A new volunteer just registered.')
+            ->line('Thank you for using our application!');
     }
 
     /**
@@ -61,5 +62,16 @@ class VolunteerRegisteredNotification extends Notification
             'phone' => $this->volunteer->phone,
             'full_name' => $this->volunteer->full_name,
         ];
+    }
+
+    public function toTelegram($notifiable)
+    {
+        $message = "A new Volunteer has just registered. \n";
+        $message .= "Email: {$this->volunteer->email} \n";
+        $message .= "Phone: {$this->volunteer->phone} \n";
+        $message .= "Full name: {$this->volunteer->full_name} \n";
+        $message .= "Message: {$this->volunteer->message} \n";
+
+        return $message;
     }
 }

@@ -8,7 +8,7 @@
 
 @section('card-content')
 
-<form action="{{ route('admin.main_slider.update', ['main_slider' => $mainSlider]) }}" method="POST">
+<form action="{{ route('admin.main_slider.update', ['main_slider' => $mainSlider]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
 
