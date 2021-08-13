@@ -39,8 +39,8 @@ class NotificationController extends Controller
     {
         $request->validate([
             'full_name' => "required|string|max:191",
-            'email' => "required|email|max:191",
-            'phone' => "required|string|max:191",
+            'email' => "required|email|max:191|unique:volunteers,email",
+            'phone' => "required|string|max:191|unique:volunteers,phone",
             'message' => "required|string|max:5000",
         ]);
 
